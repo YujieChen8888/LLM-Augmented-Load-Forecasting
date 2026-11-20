@@ -41,3 +41,37 @@ ol.numbered-list{padding:0;list-style:none;margin-bottom:0}
 .event-step{grid-area:1/1;visibility:hidden;pointer-events:none}
 .event-step.is-active{visibility:visible;pointer-events:auto}
 @media(max-width:650px){.demo-stages{gap:12px;margin-bottom:24px}.demo-stages li{font-size:14px;line-height:1.45}.demo-stages span{display:block;margin:0 0 4px}}
+
+/* Research questions, resource link, and discussion evidence. */
+.hero-resources{margin-top:27px}
+.code-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:6px 23px;border:1px solid var(--ink);border-radius:5px;background:var(--ink);color:#fff;font-size:15px;font-weight:600;line-height:1.6}
+.code-button:hover{background:#2b4053;border-color:#2b4053;color:#fff}
+.code-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hero .release-note{margin:11px auto 0;color:#596372;font-size:13px;font-weight:400;line-height:1.65;max-width:640px}
+.research-questions{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:0}
+.research-questions>li{padding-block:20px 25px;border-top:1px solid var(--line)}
+.question-label{color:var(--blue);font-size:14px;font-weight:600;line-height:1.6;margin:0 0 11px}
+.research-questions h3{font-size:22px;line-height:1.5;font-weight:650;letter-spacing:-.02em}
+.research-questions+.demo-section{padding-top:32px;border-top:1px solid var(--line);margin-top:12px}
+.method-heading{margin-bottom:28px}
+.method-heading .section-kicker{line-height:1.6;margin-bottom:0}
+.method-heading>p:last-child{margin-top:10px}
+.results-baselines{display:block}
+.discussion-block+.discussion-block{margin-top:48px;padding-top:42px;border-top:1px solid var(--line)}
+.discussion-question{display:grid;grid-template-columns:26px minmax(0,1fr);gap:14px;align-items:start;margin-bottom:21px}
+.discussion-question .point-index{padding-top:8px}
+.discussion-question h3{font-size:27px;line-height:1.35}
+.discussion-lead{max-width:900px;font-size:19px;line-height:1.65;color:var(--ink);font-weight:500;margin-bottom:28px}
+.relevance-evidence{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:35px}
+.discussion-copy h4,.discussion-weather h4{margin-bottom:10px}
+.discussion-copy p{font-size:16px;line-height:1.8;margin:0}
+.relevance-evidence .ablation-values{margin:0}
+.relevance-evidence .ablation-values>div:first-child{border-top:1px solid var(--line)}
+.discussion-weather{padding-top:35px;border-top:1px solid var(--line)}
+.encoder-evidence{display:grid;grid-template-columns:1.15fr 1fr;gap:42px;align-items:start;margin-top:29px}
+.encoder-evidence caption{text-align:left;font-size:18px;color:var(--ink);font-weight:650;padding-bottom:16px}
+.encoder-evidence th,.encoder-evidence td{padding-block:14px}
+.discussion-context{font-size:14px;line-height:1.75;color:var(--muted);margin:24px 0 0}
+@media(max-width:900px){.site-header nav{gap:16px}.site-header nav a{font-size:13px}.relevance-evidence{gap:35px}.encoder-evidence{grid-template-columns:1fr;gap:28px}.research-questions{gap:28px}.research-questions h3{font-size:20px}}
+@media(min-width:651px) and (max-width:760px){.nav-wrap{gap:16px}.wordmark{font-size:14px;gap:6px}.wordmark svg{width:24px}.site-header nav{gap:11px}.site-header nav a{font-size:12px}}
+@media(max-width:650px){.site-header nav{gap:9px;overflow-x:auto;padding-bottom:10px;margin-bottom:-10px}.site-header nav a{font-size:12px}.site-header nav a.active:after{bottom:-8px}.hero-resources{margin-top:23px}.code-button{font-size:14px;padding-inline:21px}.hero .release-note{font-size:12px;max-width:360px;padding-inline:10px}.research-questions{grid-template-columns:1fr;gap:0}.research-questions>li{padding-block:19px 24px}.research-questions h3{font-size:20px}.question-label{font-size:13px;margin-bottom:8px}.research-questions+.demo-section{padding-top:27px;margin-top:6px}.method-heading{margin-bottom:24px}.discussion-question{grid-template-columns:23px minmax(0,1fr);gap:12px}.discussion-question h3{font-size:23px}.discussion-question .point-index{padding-top:5px}.discussion-lead{font-size:17px}.relevance-evidence{grid-template-columns:1fr;gap:22px;margin-bottom:28px}.discussion-weather{padding-top:28px}.discussion-block+.discussion-block{margin-top:34px;padding-top:30px}.encoder-evidence{margin-top:23px}.encoder-evidence th,.encoder-evidence td{padding:12px 6px}.discussion-context{font-size:13px;margin-top:20px}}
