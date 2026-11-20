@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#edf1f5">
   <title>LLM-Augmented Day-Ahead Load Forecasting under External Shocks</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20261120-compact-cover">
+  <link rel="stylesheet" href="styles.css?v=20261120-discussion">
   <script src="assets/demo-data.js" defer></script>
   <script src="app.js?v=20261120-faster-story" defer></script>
 </head>
@@ -15,7 +15,7 @@
   <a class="skip-link" href="#motivation">Skip to content</a>
   <header class="site-header"><div class="nav-wrap">
     <a class="wordmark" href="#top" aria-label="Back to top"><svg viewBox="0 0 32 24" aria-hidden="true"><path d="M1 16h5l4-11 6 16 5-12 4 7h6"/></svg><span>Load Forecasting</span></a>
-    <nav aria-label="Page navigation"><a href="#motivation">Motivation</a><a href="#method">Method</a><a href="#results">Results</a><a href="#cases">Case studies</a></nav>
+    <nav aria-label="Page navigation"><a href="#motivation">Motivation</a><a href="#method">Method</a><a href="#results">Results</a><a href="#cases">Case studies</a><a href="#discussion">Discussion</a></nav>
   </div></header>
   <main id="top">
     <div class="intro-surface">
@@ -23,11 +23,19 @@
       <h1 id="paper-title">LLM-Augmented Day-Ahead<br class="title-break"> Load Forecasting<br class="title-break"> <span>under External Shocks</span></h1>
       <p class="authors"><a href="https://yujiechen8888.github.io/" target="_blank" rel="noopener noreferrer">Yujie Chen<sup>1</sup></a><span>Yifei Gao<sup>2</sup></span><a href="https://runyao-yu.com/" target="_blank" rel="noopener noreferrer">Runyao Yu<sup>3,4</sup></a><span>Yue Chen<sup>5</sup></span><span>Tongxin Li<sup>1</sup></span></p>
       <div class="affiliations"><span><sup>1</sup> The Chinese University of Hong Kong, Shenzhen</span><span><sup>2</sup> Dongbei University of Finance and Economics</span><span><sup>3</sup> Delft University of Technology</span><span><sup>4</sup> Austrian Institute of Technology</span><span><sup>5</sup> The Chinese University of Hong Kong</span></div>
+      <div class="hero-resources">
+        <a class="code-button" href="https://github.com/YujieChen8888/LLM-Augmented-Load-Forecasting" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>Code</a>
+        <p class="release-note">The complete source code and datasets will be open-sourced upon acceptance.</p>
+      </div>
     </section>
     </div>
     <div class="paper-body">
       <section class="chapter container" id="motivation" aria-labelledby="motivation-title">
-        <div class="chapter-heading"><p class="section-kicker">Motivation</p><h2 id="motivation-title">Why event information matters</h2><p>News can reveal a demand change before it appears in the load history.</p></div>
+        <div class="chapter-heading"><p class="section-kicker">Motivation</p><h2 id="motivation-title">Two core research questions</h2></div>
+        <ol class="research-questions numbered-list" role="list">
+          <li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><p class="question-label">Event extraction</p><h3>How can load-relevant structured events be extracted from large-scale, noisy, unstructured news?</h3></div></li>
+          <li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><p class="question-label">Event fusion and predictive value</p><h3>How can these events be effectively fused with load context, and under what conditions does news provide additional predictive value?</h3></div></li>
+        </ol>
     <div class="demo-section" id="demo">
       <div class="demo-heading"><h3 id="demo-heading">Signals beyond load history</h3><div class="segmented" role="group" aria-label="Illustrative scenario"><button data-scenario="shutdown" aria-pressed="true">Industrial shutdown</button><button data-scenario="heatwave" aria-pressed="false">Heatwave warning</button></div></div>
       <ol class="demo-stages" aria-label="Illustration stages"><li data-demo-phase="history" aria-current="step"><span>01</span> Load history</li><li data-demo-phase="news"><span>02</span> News arrives</li><li data-demo-phase="forecast"><span>03</span> Forecast adjusts</li></ol>
@@ -49,7 +57,7 @@
         </div>
       </section>
       <section class="chapter container" id="method" aria-labelledby="method-title">
-        <div class="chapter-heading"><p class="section-kicker">Method</p><h2 id="method-title">From news to a load forecast</h2><p>Structure the event, preserve its scope, and fuse it with the load context.</p></div>
+        <div class="chapter-heading method-heading"><h2 class="section-kicker" id="method-title">Method</h2><p>Structure the event, preserve its scope, and fuse it with the load context.</p></div>
         <figure class="paper-figure framework-figure" data-paper-figure="figure3_framework.pdf"><button class="figure-zoom" data-image="assets/framework.png" data-caption="The forecasting framework" aria-label="Enlarge: The forecasting framework"><img src="assets/framework.png" width="2600" height="1345" loading="lazy" decoding="async" alt="News is structured by the Semantic Disentanglement Agent, represented by spatial scope, and fused with load and state tokens. Main and timestamp predictions are combined with an interaction correction."></button></figure>
         <ol class="method-notes numbered-list" role="list"><li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><h3>Structure the news</h3><p>Separate reported facts from anticipated conditions and retain load-relevant events.</p></div></li><li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><h3>Condition on the load</h3><p>Joint encoding and a bilinear correction connect event semantics to recent demand.</p></div></li><li><span class="point-index" aria-hidden="true">03</span><div class="point-copy"><h3>Retain temporal patterns</h3><p>Known future timestamps supply a complementary numerical prediction.</p></div></li></ol>
         <div class="equation" aria-label="The final forecast combines weighted main and timestamp predictions with an interaction correction"><span>Forecast</span><b>=</b><span>(1 − w) · Main prediction</span><b>+</b><span>w · Timestamp prediction</span><b>+</b><span>Interaction correction</span></div>
@@ -67,7 +75,7 @@
           </div>
           <div id="results-panel-overall" class="results-panel" role="tabpanel" aria-labelledby="results-tab-overall" tabindex="0">
             <div class="headline-results"><div><strong>207.46 <small>MW</small></strong><span>Mean absolute error</span></div><div><strong>6.66%</strong><span>Lower MAE than iTransformer</span></div><div><strong>27</strong><span>Baseline models</span></div></div>
-      <div class="results-layout"><div class="result-table-wrap"><h3>Selected baselines</h3><table><caption class="sr-only">Test-set MAE and RMSE in megawatts. Lower is better.</caption><thead><tr><th scope="col">Model</th><th scope="col">MAE (MW)</th><th scope="col">RMSE (MW)</th></tr></thead><tbody><tr class="ours"><th scope="row">Ours</th><td>207.46</td><td>347.80</td></tr><tr><th scope="row">iTransformer</th><td>222.27</td><td>357.36</td></tr><tr><th scope="row">LightGBM</th><td>222.80</td><td>369.35</td></tr><tr><th scope="row">Loadformer</th><td>225.40</td><td>365.63</td></tr><tr><th scope="row">GPT4MTS</th><td>228.69</td><td>371.65</td></tr><tr><th scope="row">Linear</th><td>232.52</td><td>379.68</td></tr></tbody></table><p class="result-context">No weather inputs · Three-seed means for stochastic models</p></div><aside class="result-insight"><h3>Event relevance matters.</h3><dl class="ablation-values"><div><dt>Raw news</dt><dd>218.52 <span>MW</span></dd></div><div><dt>No news</dt><dd>217.62 <span>MW</span></dd></div><div class="best"><dt>Structured events</dt><dd>207.46 <span>MW</span></dd></div></dl><p>Relevant event semantics improve MAE; more text alone does not.</p></aside></div>
+      <div class="results-layout results-baselines"><div class="result-table-wrap"><h3>Selected baselines</h3><table><caption class="sr-only">Test-set MAE and RMSE in megawatts. Lower is better.</caption><thead><tr><th scope="col">Model</th><th scope="col">MAE (MW)</th><th scope="col">RMSE (MW)</th></tr></thead><tbody><tr class="ours"><th scope="row">Ours</th><td>207.46</td><td>347.80</td></tr><tr><th scope="row">iTransformer</th><td>222.27</td><td>357.36</td></tr><tr><th scope="row">LightGBM</th><td>222.80</td><td>369.35</td></tr><tr><th scope="row">Loadformer</th><td>225.40</td><td>365.63</td></tr><tr><th scope="row">GPT4MTS</th><td>228.69</td><td>371.65</td></tr><tr><th scope="row">Linear</th><td>232.52</td><td>379.68</td></tr></tbody></table><p class="result-context">No weather inputs · Three-seed means for stochastic models</p></div></div>
           </div>
           <div id="results-panel-states" class="results-panel" role="tabpanel" aria-labelledby="results-tab-states" tabindex="0" hidden>
             <div class="regional-results"><h3>Consistent gains across states</h3><p>MAE improvement over each state's best selected baseline.</p><div class="state-results"><div><span>NSW</span><strong>8.50%</strong></div><div><span>QLD</span><strong>8.12%</strong></div><div><span>SA</span><strong>5.42%</strong></div><div><span>TAS</span><strong>2.66%</strong></div><div><span>VIC</span><strong>3.42%</strong></div></div></div>
@@ -77,15 +85,37 @@
           <figure class="paper-figure " data-paper-figure="period_comparison.pdf"><button class="figure-zoom" data-image="assets/period-comparison.png" data-caption="Forecasting performance across period classes" aria-label="Enlarge: Forecasting performance across period classes"><img src="assets/period-comparison.png" width="1600" height="1375" loading="lazy" decoding="async" alt="Mean MAE for six models during normal, signal-only, signal-plus-anomaly, and anomaly-only periods. Ours has the lowest mean MAE in each group."></button></figure>
           <div class="figure-copy"><p class="figure-lead">Lowest mean MAE across all four period classes.</p><div class="single-result"><strong>9.31%</strong><span>Lower shock-period MAE than LightGBM, the best comparator</span></div><p>380.13 MW versus 419.16 MW on days with both an event signal and a load anomaly.</p><p class="context-note">The shock group is a retrospective proxy: 35 state–day samples with eligible news and unusually large no-news errors.</p></div>
         </div></div>
-        <div class="research-block"><h3>Does news still help when weather is available?</h3><div class="figure-story">
-          <figure class="paper-figure " data-paper-figure="weather_period_comparison.pdf"><button class="figure-zoom" data-image="assets/weather-comparison.png" data-caption="News contribution with and without weather" aria-label="Enlarge: News contribution with and without weather"><img src="assets/weather-comparison.png" width="1600" height="1033" loading="lazy" decoding="async" alt="Shock-period MAE reductions from adding news are 20.62 percent without weather and 4.93 percent with historical weather. With weather, news slightly increases error in other periods."></button></figure>
-          <div class="figure-copy"><p class="figure-lead">Its value depends on what the forecaster already knows.</p><p>Shock-period MAE reduction from adding news:</p><div class="comparison-gains"><div><strong>20.62%</strong><span>Without weather</span></div><div><strong>4.93%</strong><span>With historical weather</span></div></div><p>News retains some complementary value during shocks. With weather, it slightly worsens accuracy in other periods.</p></div>
-        </div></div>
       </section>
       <section class="chapter container" id="cases" aria-labelledby="cases-title">
         <div class="chapter-heading"><p class="section-kicker">Case studies</p><h2 id="cases-title">How the forecasts respond to real events</h2><p>Reported disruptions and advance warnings illustrate the two roles of news.</p></div>
         <figure class="paper-figure " data-paper-figure="news_event_cases.pdf"><button class="figure-zoom" data-image="assets/case-studies.png" data-caption="NSW outages and SA heatwave warning" aria-label="Enlarge: NSW outages and SA heatwave warning"><img src="assets/case-studies.png" width="2400" height="877" loading="lazy" decoding="async" alt="Observed load, forecasts, and daily MAE for NSW on November 23–24, 2022 and SA on December 26–27, 2022. Dashed lines mark the first forecast using each report."></button></figure>
         <ol class="case-notes numbered-list" role="list"><li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><p class="case-location">NSW · November 23–24, 2022</p><h3>Reported disruption</h3><p>Outage reports help track daytime load troughs.</p><p class="case-metric"><strong>97.51 MW</strong> two-day MAE<br>Best comparator: Linear, 193.39 MW.</p></div></li><li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><p class="case-location">SA · December 26–27, 2022</p><h3>Advance heatwave warning</h3><p>Advance warnings signal higher cooling demand.</p><p class="case-metric"><strong>163.10 MW</strong> two-day MAE<br>18.09% lower than Loadformer, the best comparator.</p></div></li></ol>
+      </section>
+      <section class="chapter container" id="discussion" aria-labelledby="discussion-title">
+        <div class="chapter-heading"><h2 id="discussion-title">Discussion</h2></div>
+        <article class="discussion-block" aria-labelledby="news-question">
+          <div class="discussion-question"><span class="point-index" aria-hidden="true">01</span><h3 id="news-question">When does news improve load forecasting?</h3></div>
+          <p class="discussion-lead">News is useful when it is relevant to the target load and adds information beyond the available numerical inputs.</p>
+          <div class="relevance-evidence">
+            <div class="discussion-copy"><h4>Information relevance</h4><p>Load-relevant events are sparse in noisy news. Filtering and structuring them improves MAE; raw news alone performs slightly worse than excluding news.</p></div>
+            <dl class="ablation-values" aria-label="Mean absolute error by news representation"><div><dt>Raw news</dt><dd>218.52 <span>MW</span></dd></div><div><dt>No news</dt><dd>217.62 <span>MW</span></dd></div><div class="best"><dt>Structured events</dt><dd>207.46 <span>MW</span></dd></div></dl>
+          </div>
+          <div class="figure-story discussion-weather">
+            <figure class="paper-figure " data-paper-figure="weather_period_comparison.pdf"><button class="figure-zoom" data-image="assets/weather-comparison.png" data-caption="News contribution with and without weather" aria-label="Enlarge: News contribution with and without weather"><img src="assets/weather-comparison.png" width="1600" height="1033" loading="lazy" decoding="async" alt="Shock-period MAE reductions from adding news are 20.62 percent without weather and 4.93 percent with historical weather. With weather, news slightly increases error in other periods."></button></figure>
+            <div class="figure-copy"><h4>Incremental information</h4><p>Shock-period MAE reduction from adding news:</p><div class="comparison-gains"><div><strong>20.62%</strong><span>Without weather</span></div><div><strong>4.93%</strong><span>With historical weather</span></div></div><p>Historical weather reduces the extra information news provides, while some complementary value remains during shocks.</p><p>In other periods with historical weather, news <strong>increases MAE by 1.14%</strong>: 178.54 to 180.57 MW.</p></div>
+          </div>
+        </article>
+        <article class="discussion-block" aria-labelledby="encoder-question">
+          <div class="discussion-question"><span class="point-index" aria-hidden="true">02</span><h3 id="encoder-question">Are pretrained language models useful as semantic encoders?</h3></div>
+          <div class="encoder-evidence">
+            <div class="result-table-wrap"><table><caption>Frozen text encoders</caption><thead><tr><th scope="col">Encoder</th><th scope="col">MAE (MW)</th><th scope="col">RMSE (MW)</th></tr></thead><tbody><tr><th scope="row">MiniLM (random)</th><td>213.32</td><td>358.49</td></tr><tr><th scope="row">BERT-base</th><td>211.73</td><td>353.17</td></tr><tr><th scope="row">LLaMA-3.2-1B</th><td>212.27</td><td>352.95</td></tr><tr><th scope="row">LLaMA-3.1-8B</th><td>209.27</td><td>351.29</td></tr><tr class="ours"><th scope="row">MiniLM (Ours)</th><td>207.46</td><td>347.80</td></tr></tbody></table><p class="result-context">Three-seed means · Lower is better</p></div>
+            <ol class="explanation-list numbered-list" role="list">
+              <li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><h4>Pretraining provides a useful semantic prior.</h4><p>With the same architecture and tokenizer, pretrained MiniLM reduces MAE by <strong>2.75%</strong> and RMSE by <strong>2.98%</strong> versus random initialization. Both frozen encoders are compared under matched settings; both metrics improve across all three seeds.</p></div></li>
+              <li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><h4>Larger encoders do not guarantee better forecasts.</h4><p>The 8B encoder improves on the 1B model, but compact MiniLM achieves the lowest errors among the tested encoders.</p></div></li>
+            </ol>
+          </div>
+          <p class="discussion-context">Encoder architectures and representation dimensions also differ; these comparisons do not isolate model size alone.</p>
+        </article>
       </section>
       <section class="takeaway container" id="takeaway" aria-labelledby="takeaway-title">
         <p class="section-kicker">The takeaway</p>
