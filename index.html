@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LLM-Augmented Day-Ahead Load Forecasting under External Shocks. Event understanding, context-aware fusion, and evidence from five Australian states.">
+  <meta name="theme-color" content="#edf1f5">
+  <title>LLM-Augmented Day-Ahead Load Forecasting under External Shocks</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20261120-compact-cover">
+  <script src="assets/demo-data.js" defer></script>
+  <script src="app.js?v=20261120-faster-story" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#motivation">Skip to content</a>
+  <header class="site-header"><div class="nav-wrap">
+    <a class="wordmark" href="#top" aria-label="Back to top"><svg viewBox="0 0 32 24" aria-hidden="true"><path d="M1 16h5l4-11 6 16 5-12 4 7h6"/></svg><span>Load Forecasting</span></a>
+    <nav aria-label="Page navigation"><a href="#motivation">Motivation</a><a href="#method">Method</a><a href="#results">Results</a><a href="#cases">Case studies</a></nav>
+  </div></header>
+  <main id="top">
+    <div class="intro-surface">
+    <section class="hero container" aria-labelledby="paper-title">
+      <h1 id="paper-title">LLM-Augmented Day-Ahead<br class="title-break"> Load Forecasting<br class="title-break"> <span>under External Shocks</span></h1>
+      <p class="authors"><a href="https://yujiechen8888.github.io/" target="_blank" rel="noopener noreferrer">Yujie Chen<sup>1</sup></a><span>Yifei Gao<sup>2</sup></span><a href="https://runyao-yu.com/" target="_blank" rel="noopener noreferrer">Runyao Yu<sup>3,4</sup></a><span>Yue Chen<sup>5</sup></span><span>Tongxin Li<sup>1</sup></span></p>
+      <div class="affiliations"><span><sup>1</sup> The Chinese University of Hong Kong, Shenzhen</span><span><sup>2</sup> Dongbei University of Finance and Economics</span><span><sup>3</sup> Delft University of Technology</span><span><sup>4</sup> Austrian Institute of Technology</span><span><sup>5</sup> The Chinese University of Hong Kong</span></div>
+    </section>
+    </div>
+    <div class="paper-body">
+      <section class="chapter container" id="motivation" aria-labelledby="motivation-title">
+        <div class="chapter-heading"><p class="section-kicker">Motivation</p><h2 id="motivation-title">Why event information matters</h2><p>News can reveal a demand change before it appears in the load history.</p></div>
+    <div class="demo-section" id="demo">
+      <div class="demo-heading"><h3 id="demo-heading">Signals beyond load history</h3><div class="segmented" role="group" aria-label="Illustrative scenario"><button data-scenario="shutdown" aria-pressed="true">Industrial shutdown</button><button data-scenario="heatwave" aria-pressed="false">Heatwave warning</button></div></div>
+      <ol class="demo-stages" aria-label="Illustration stages"><li data-demo-phase="history" aria-current="step"><span>01</span> Load history</li><li data-demo-phase="news"><span>02</span> News arrives</li><li data-demo-phase="forecast"><span>03</span> Forecast adjusts</li></ol>
+      <div class="demo-body">
+        <aside class="event-note">
+          <div class="event-step is-active" data-event-phase="history"><span class="scenario-label">Recent observations</span><h3>Demand follows its usual pattern.</h3><p>Historical load supports a numerical forecast. No event information has been added yet.</p><span class="event-scope">Load history + numerical forecast</span></div>
+          <div class="event-step" data-event-phase="news" aria-hidden="true"><span class="scenario-label">New information</span><h3 id="event-title">An industrial facility announces a shutdown.</h3><p id="event-description">A shutdown announcement signals lower demand before the change appears in load history.</p><span class="event-scope" id="event-scope">Local / corporate event</span></div>
+          <div class="event-step" data-event-phase="forecast" aria-hidden="true"><span class="scenario-label">Forecast response</span><h3 id="response-title">The forecast shifts downward.</h3><p id="response-description">The shutdown implies lower demand. Event information adjusts the forecast below the numerical baseline.</p><span class="event-scope">News-augmented forecast</span></div>
+        </aside>
+        <div class="chart-area"><div class="chart-topline"><span>Normalized load</span><span>Synthetic illustration</span></div><svg id="forecast-chart" viewBox="0 0 780 285" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">How event information adjusts a day-ahead load forecast</title><desc id="chart-desc">Three stages show historical load and a numerical forecast, news available at the forecast origin, and a forecast adjusted using that news. Synthetic trajectories illustrate the idea; these are not experimental results.</desc><defs><clipPath id="history-clip"><rect id="history-reveal" x="38" y="15" width="294" height="224"/></clipPath><clipPath id="future-clip"><rect id="reveal-rect" x="328" y="15" width="418" height="224"/></clipPath></defs><rect x="330" y="15" width="414" height="222" fill="#f3f6fb"/><g id="chart-lines"></g><g id="chart-axes"></g><line id="forecast-origin" x1="330" y1="15" x2="330" y2="237" stroke="#9ba8b9" stroke-dasharray="4 5"/><text id="forecast-origin-label" x="340" y="32" class="svg-label">Forecast origin</text><circle id="news-marker" cx="330" cy="28" r="5" fill="#265b96" opacity="0"/><g clip-path="url(#future-clip)"><path id="gap-area" fill="#dce7fa" opacity=".8"/><path id="baseline-line" class="forecast-path baseline"/><path id="adjusted-line" class="forecast-path adjusted"/></g><circle id="forecast-dot" r="4" fill="#265b96" opacity="0"/></svg><div class="chart-legend"><span class="history-key">History</span><span class="baseline-key">Numerical forecast</span><span class="adjusted-key">News-augmented</span></div><div class="animation-controls"><button id="animation-toggle" aria-label="Pause animation" aria-pressed="false">Pause</button></div></div>
+      </div>
+    </div>
+        <div class="research-block paradigm-block">
+          <h3>Specialized models for specialized tasks</h3>
+          <div class="figure-story">
+            <figure class="paper-figure " data-paper-figure="paradigm.pdf"><button class="figure-zoom" data-image="assets/paradigms.png" data-caption="Four paradigms of multimodal forecasting" aria-label="Enlarge: Four paradigms of multimodal forecasting"><img src="assets/paradigms.png" width="2200" height="1224" loading="lazy" decoding="async" alt="Statistical feature engineering, deep semantic embedding, LLM-as-backbone forecasting, and a time-series backbone with LLM-augmented semantics."></button></figure>
+            <div class="figure-copy"><p class="figure-lead">Language models understand the events. A time-series backbone predicts the load.</p><ol class="explanation-list numbered-list" role="list"><li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><h4>Semantic processing</h4><p>Extract relevant events and preserve their timing and location.</p></div></li><li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><h4>Numerical forecasting</h4><p>Learn how those events relate to the recent demand pattern.</p></div></li></ol></div>
+          </div>
+        </div>
+      </section>
+      <section class="chapter container" id="method" aria-labelledby="method-title">
+        <div class="chapter-heading"><p class="section-kicker">Method</p><h2 id="method-title">From news to a load forecast</h2><p>Structure the event, preserve its scope, and fuse it with the load context.</p></div>
+        <figure class="paper-figure framework-figure" data-paper-figure="figure3_framework.pdf"><button class="figure-zoom" data-image="assets/framework.png" data-caption="The forecasting framework" aria-label="Enlarge: The forecasting framework"><img src="assets/framework.png" width="2600" height="1345" loading="lazy" decoding="async" alt="News is structured by the Semantic Disentanglement Agent, represented by spatial scope, and fused with load and state tokens. Main and timestamp predictions are combined with an interaction correction."></button></figure>
+        <ol class="method-notes numbered-list" role="list"><li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><h3>Structure the news</h3><p>Separate reported facts from anticipated conditions and retain load-relevant events.</p></div></li><li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><h3>Condition on the load</h3><p>Joint encoding and a bilinear correction connect event semantics to recent demand.</p></div></li><li><span class="point-index" aria-hidden="true">03</span><div class="point-copy"><h3>Retain temporal patterns</h3><p>Known future timestamps supply a complementary numerical prediction.</p></div></li></ol>
+        <div class="equation" aria-label="The final forecast combines weighted main and timestamp predictions with an interaction correction"><span>Forecast</span><b>=</b><span>(1 − w) · Main prediction</span><b>+</b><span>w · Timestamp prediction</span><b>+</b><span>Interaction correction</span></div>
+        <div class="research-block agent-block"><h3>Inside the Semantic Disentanglement Agent</h3><div class="figure-story">
+          <figure class="paper-figure " data-paper-figure="figure4_semantic_agent.pdf"><button class="figure-zoom" data-image="assets/semantic-agent-detail.png" data-caption="Semantic Disentanglement Agent" aria-label="Enlarge: Semantic Disentanglement Agent"><img src="assets/semantic-agent-detail.png" width="2200" height="1434" loading="lazy" decoding="async" alt="Event extraction and summarization followed by temporal separation, spatial mapping, and cognitive gating produce structured events."></button></figure>
+          <div class="figure-copy"><p class="figure-lead">What happened, where it matters, and whether it is a fact or a forecast.</p><ol class="explanation-list numbered-list" role="list"><li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><h4>Event extraction</h4><p>Keep source-supported descriptions.</p></div></li><li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><h4>Time and spatial scope</h4><p>Distinguish facts from forecasts; organize local, state, and national events.</p></div></li><li><span class="point-index" aria-hidden="true">03</span><div class="point-copy"><h4>Relevance gating</h4><p>Retain events with sufficient potential impact on aggregate load.</p></div></li></ol></div>
+        </div></div>
+      </section>
+      <section class="chapter container" id="results" aria-labelledby="results-title">
+        <div class="chapter-heading"><p class="section-kicker">Results</p><h2 id="results-title">What the experiments show</h2><p>Five Australian states · 7-day input · 24-hour forecast · 30-minute resolution</p></div>
+        <div class="overall-results results-explorer">
+          <div class="results-tabs" role="tablist" aria-label="Experiment results">
+            <button type="button" id="results-tab-overall" class="results-tab" role="tab" aria-selected="true" aria-controls="results-panel-overall" tabindex="0">Overall performance</button>
+            <button type="button" id="results-tab-states" class="results-tab" role="tab" aria-selected="false" aria-controls="results-panel-states" tabindex="-1">By state</button>
+          </div>
+          <div id="results-panel-overall" class="results-panel" role="tabpanel" aria-labelledby="results-tab-overall" tabindex="0">
+            <div class="headline-results"><div><strong>207.46 <small>MW</small></strong><span>Mean absolute error</span></div><div><strong>6.66%</strong><span>Lower MAE than iTransformer</span></div><div><strong>27</strong><span>Baseline models</span></div></div>
+      <div class="results-layout"><div class="result-table-wrap"><h3>Selected baselines</h3><table><caption class="sr-only">Test-set MAE and RMSE in megawatts. Lower is better.</caption><thead><tr><th scope="col">Model</th><th scope="col">MAE (MW)</th><th scope="col">RMSE (MW)</th></tr></thead><tbody><tr class="ours"><th scope="row">Ours</th><td>207.46</td><td>347.80</td></tr><tr><th scope="row">iTransformer</th><td>222.27</td><td>357.36</td></tr><tr><th scope="row">LightGBM</th><td>222.80</td><td>369.35</td></tr><tr><th scope="row">Loadformer</th><td>225.40</td><td>365.63</td></tr><tr><th scope="row">GPT4MTS</th><td>228.69</td><td>371.65</td></tr><tr><th scope="row">Linear</th><td>232.52</td><td>379.68</td></tr></tbody></table><p class="result-context">No weather inputs · Three-seed means for stochastic models</p></div><aside class="result-insight"><h3>Event relevance matters.</h3><dl class="ablation-values"><div><dt>Raw news</dt><dd>218.52 <span>MW</span></dd></div><div><dt>No news</dt><dd>217.62 <span>MW</span></dd></div><div class="best"><dt>Structured events</dt><dd>207.46 <span>MW</span></dd></div></dl><p>Relevant event semantics improve MAE; more text alone does not.</p></aside></div>
+          </div>
+          <div id="results-panel-states" class="results-panel" role="tabpanel" aria-labelledby="results-tab-states" tabindex="0" hidden>
+            <div class="regional-results"><h3>Consistent gains across states</h3><p>MAE improvement over each state's best selected baseline.</p><div class="state-results"><div><span>NSW</span><strong>8.50%</strong></div><div><span>QLD</span><strong>8.12%</strong></div><div><span>SA</span><strong>5.42%</strong></div><div><span>TAS</span><strong>2.66%</strong></div><div><span>VIC</span><strong>3.42%</strong></div></div></div>
+          </div>
+        </div>
+        <div class="research-block"><h3>Where are the gains largest?</h3><div class="figure-story">
+          <figure class="paper-figure " data-paper-figure="period_comparison.pdf"><button class="figure-zoom" data-image="assets/period-comparison.png" data-caption="Forecasting performance across period classes" aria-label="Enlarge: Forecasting performance across period classes"><img src="assets/period-comparison.png" width="1600" height="1375" loading="lazy" decoding="async" alt="Mean MAE for six models during normal, signal-only, signal-plus-anomaly, and anomaly-only periods. Ours has the lowest mean MAE in each group."></button></figure>
+          <div class="figure-copy"><p class="figure-lead">Lowest mean MAE across all four period classes.</p><div class="single-result"><strong>9.31%</strong><span>Lower shock-period MAE than LightGBM, the best comparator</span></div><p>380.13 MW versus 419.16 MW on days with both an event signal and a load anomaly.</p><p class="context-note">The shock group is a retrospective proxy: 35 state–day samples with eligible news and unusually large no-news errors.</p></div>
+        </div></div>
+        <div class="research-block"><h3>Does news still help when weather is available?</h3><div class="figure-story">
+          <figure class="paper-figure " data-paper-figure="weather_period_comparison.pdf"><button class="figure-zoom" data-image="assets/weather-comparison.png" data-caption="News contribution with and without weather" aria-label="Enlarge: News contribution with and without weather"><img src="assets/weather-comparison.png" width="1600" height="1033" loading="lazy" decoding="async" alt="Shock-period MAE reductions from adding news are 20.62 percent without weather and 4.93 percent with historical weather. With weather, news slightly increases error in other periods."></button></figure>
+          <div class="figure-copy"><p class="figure-lead">Its value depends on what the forecaster already knows.</p><p>Shock-period MAE reduction from adding news:</p><div class="comparison-gains"><div><strong>20.62%</strong><span>Without weather</span></div><div><strong>4.93%</strong><span>With historical weather</span></div></div><p>News retains some complementary value during shocks. With weather, it slightly worsens accuracy in other periods.</p></div>
+        </div></div>
+      </section>
+      <section class="chapter container" id="cases" aria-labelledby="cases-title">
+        <div class="chapter-heading"><p class="section-kicker">Case studies</p><h2 id="cases-title">How the forecasts respond to real events</h2><p>Reported disruptions and advance warnings illustrate the two roles of news.</p></div>
+        <figure class="paper-figure " data-paper-figure="news_event_cases.pdf"><button class="figure-zoom" data-image="assets/case-studies.png" data-caption="NSW outages and SA heatwave warning" aria-label="Enlarge: NSW outages and SA heatwave warning"><img src="assets/case-studies.png" width="2400" height="877" loading="lazy" decoding="async" alt="Observed load, forecasts, and daily MAE for NSW on November 23–24, 2022 and SA on December 26–27, 2022. Dashed lines mark the first forecast using each report."></button></figure>
+        <ol class="case-notes numbered-list" role="list"><li><span class="point-index" aria-hidden="true">01</span><div class="point-copy"><p class="case-location">NSW · November 23–24, 2022</p><h3>Reported disruption</h3><p>Outage reports help track daytime load troughs.</p><p class="case-metric"><strong>97.51 MW</strong> two-day MAE<br>Best comparator: Linear, 193.39 MW.</p></div></li><li><span class="point-index" aria-hidden="true">02</span><div class="point-copy"><p class="case-location">SA · December 26–27, 2022</p><h3>Advance heatwave warning</h3><p>Advance warnings signal higher cooling demand.</p><p class="case-metric"><strong>163.10 MW</strong> two-day MAE<br>18.09% lower than Loadformer, the best comparator.</p></div></li></ol>
+      </section>
+      <section class="takeaway container" id="takeaway" aria-labelledby="takeaway-title">
+        <p class="section-kicker">The takeaway</p>
+        <h2 id="takeaway-title">Structured events, fused with load context, improve forecasting under external shocks.</h2>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer container"><p>LLM-Augmented Load Forecasting</p><a href="#top">Back to top</a></footer>
+  <dialog id="image-dialog" aria-labelledby="dialog-caption"><div class="dialog-header"><p id="dialog-caption"></p><button id="close-dialog" aria-label="Close enlarged image">Close ×</button></div><img id="dialog-image" alt=""></dialog>
+</body>
+</html>
